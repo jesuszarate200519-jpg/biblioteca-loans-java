@@ -1,38 +1,39 @@
 package com.biblioteca;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+class AppTest {
+
+    @Test
+    void testTrueIsTrue() {
+        assertTrue(true, "true debería ser true");
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    void testSum() {
+        int a = 2;
+        int b = 3;
+        int result = a + b;
+        assertEquals(5, result, "2 + 3 debería ser 5");
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void testStringNotNull() {
+        String str = "Biblioteca";
+        assertNotNull(str, "La cadena no debería ser null");
+        assertEquals("Biblioteca", str, "La cadena debería ser 'Biblioteca'");
+    }
+
+    @Test
+    void testException() {
+        Exception exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> { throw new IllegalArgumentException("Error de prueba"); }
+        );
+        assertEquals("Error de prueba", exception.getMessage());
     }
 }
